@@ -1,13 +1,20 @@
-<ul class="well" ng-controller="IdentityController">
-    <li>{{identity.name}}</li>
-    <li>{{identity.avatar}}</li>
-    <li><a href="{{identity.url}}" target="_blank">{{identity.url}}</a></li>
-    <li>{{identity.timestamp}}</li>
-    <li>{{identity.email}}</li>
-    <li>Initial Response: {{identity.initial_response}}</li>
-    <li>Last Response: {{identity.last_response}}</li>
-    <li>Resume Submitted: {{identity.resume_submitted}}</li>
-    <li>Recruiter Initial Appointment: {{identity.recruiter_phone_initial_appt}}</li>
+<ul class="well">
+    <li>{{identity.data.identity.name}}</li>
+    <li><img src="{{identity.data.identity.avatar}}" /></li>
+    <li><a href="{{identity.url}}" target="_blank">{{identity.data.identity.ip_address[0].address}}</a></li>
+    <hr/>
+    <h3>Friends</h3>
+    <ul>
+        <li ng-repeat="friend in identity.data.friends">
+            <span>{{friend.data.identity.name}}</span>
+        </li>
+    </ul>
+    <h3>Status updates</h3>
+    <ul>
+        <li ng-repeat="status in identity.data.status">
+            <span>{{status.content}}</span>
+        </li>
+    </ul>
 </ul>
 <div>
     <span us-spinner spinner-key="spinner-1"></span>

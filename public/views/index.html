@@ -25,7 +25,7 @@
     <script src="js/app.js"></script>
 </head>
 <body ng-app="yada">
-	<div class="container">
+	<div class="container" ng-controller="IdentityController">
 
 	    <!-- HEADER -->
 	    <nav class="navbar navbar-inverse">
@@ -34,11 +34,20 @@
                 </a>
 	        </div>
 
-            <ul class="nav navbar-nav pull-right" ng-controller="IdentityController">
+            <ul class="nav navbar-nav pull-right">
                 <li>
-                    <form onSubmit="javascript: void(0);" method="post">
-                        <input type="text" placeholder="Identity URL" />
-                        <input type="submit" value="Go" ng-click="go()" />
+                    <form onSubmit="javascript: void(0);" method="post" class="input-group">
+                        <input type="text" placeholder="Identity URL" ng-model="address" class="form-control" />
+                        <span class="input-group-btn">
+                            <input type="submit" value="Go" ng-click="go()" class="btn btn-primary" />
+                        </span>
+                    </form>
+                    <br/>
+                    <form onSubmit="javascript: void(0);" method="post" class="input-group">
+                        <input type="text" placeholder="Context URL(optional)" class="form-control" ng-model="context" />
+                        <span class="input-group-btn">
+                            <input type="submit" value="Add Friend" ng-click="request()" class="btn btn-primary" ng-class="{'disabled':!identity.data || !context}" />
+                        </span>
                     </form>
                 </li>
             </ul>
@@ -48,6 +57,8 @@
             
             <!-- end view code -->
         </div>
+        <a href="http://worldwide.espacenet.com/publicationDetails/biblio;jsessionid=TnZAC8Wd9arlq-sVWpwvB4vE.espacenet_levelx_prod_1?FT=D&date=20120503&DB=worldwide.espacenet.com&locale=en_EP&CC=US&NR=2012109830A1&KC=A1&ND=4" target="_blank">Patent Pending</a> - That said, this is an open source / open protocol system, but if you make money using the code or protocol, I will want some money. Otherwise, enjoy! :D
+
 	</div>
 </body>
 </html>
