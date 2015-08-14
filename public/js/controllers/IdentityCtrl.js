@@ -9,10 +9,23 @@ angular.module('IdentityCtrl', []).controller('IdentityController', ['$scope', '
       usSpinnerService.spin('spinner-1');
       $http.get($scope.address).then(function(resp) {
         usSpinnerService.stop('spinner-1');
-        console.log(resp.data.data);
+        console.log(resp.data);
         $scope.identity = resp.data;
+        $scope.addressForm.$setPristine(true);
       }, function(err) {
         console.error('ERR', err);
       });
-	}
+    }
+    $scope.save = function(item) {
+      time = new Date();
+      console.log($scope.identity);
+      $scope.identity.data.identity.modified = time.getTime()
+      usSpinnerService.spin('spinner-1');
+      $http.post($scope.address + 'postIdentity/', {'METHOD':'postIdentity', 'data':$scope.identity}).then(function(resp) {
+        usSpinnerService.stop('spinner-1');
+        console.log(resp.data);
+      }, function(err) {
+        console.error('ERR', err);
+      });
+    }
 }]);

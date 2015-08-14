@@ -1,21 +1,31 @@
-<ul class="well">
-    <li>{{identity.data.identity.name}}</li>
-    <li><img src="{{identity.data.identity.avatar}}" /></li>
-    <li><a href="{{identity.url}}" target="_blank">{{identity.data.identity.ip_address[0].address}}</a></li>
+<div class="well">
+    <div ng-if="identity.data && address.indexOf('localhost') < 0">
+        {{identity.data.identity.name}}
+        <br>
+        <img src="{{identity.data.identity.avatar}}" />
+        <br>
+        <a href="{{identity.url}}" target="_blank">{{identity.data.identity.ip_address[0].address}}</a>
+    </div>
+    <div ng-if="identity.data && address.indexOf('localhost') > -1">
+        <input type="text" ng-model="identity.data.identity.name" class="form-control" ng-class="{'disabled':!identity.data || !context}" placeholder="Name" />
+        <input type="text" ng-model="identity.data.identity.avatar" class="form-control" ng-class="{'disabled':!identity.data || !context}" placeholder="Avatar Url" />
+        <input type="text" ng-model="identity.data.identity.ip_address[0].address" class="form-control" ng-class="{'disabled':!identity.data || !context}" placeholder="IP Address" />
+        <input type="submit" value="Save" ng-click="save()" class="btn btn-primary" ng-class="{'disabled':!identity.data}" />
+    </div>
     <hr/>
-    <h3>Friends</h3>
+    <h3 ng-if="identity.data">Friends</h3>
     <ul>
         <li ng-repeat="friend in identity.data.friends">
             <span>{{friend.data.identity.name}}</span>
         </li>
     </ul>
-    <h3>Status updates</h3>
+    <h3 ng-if="identity.data">Status updates</h3>
     <ul>
         <li ng-repeat="status in identity.data.status">
             <span>{{status.content}}</span>
         </li>
     </ul>
-</ul>
+</div>
 <div>
     <span us-spinner spinner-key="spinner-1"></span>
 </div>

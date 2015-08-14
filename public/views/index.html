@@ -30,23 +30,23 @@
 	    <!-- HEADER -->
 	    <nav class="navbar navbar-inverse">
 	        <div class="navbar-header">
-	            <a class="navbar-brand" href="/">Yada
-                </a>
+	            <a class="navbar-brand" href="/">Yada</a>
 	        </div>
 
             <ul class="nav navbar-nav pull-right">
                 <li>
-                    <form onSubmit="javascript: void(0);" method="post" class="input-group">
+                    <form name="addressForm" onSubmit="javascript: void(0);" method="post" class="input-group">
                         <input type="text" placeholder="Identity URL" ng-model="address" class="form-control" />
                         <span class="input-group-btn">
                             <input type="submit" value="Go" ng-click="go()" class="btn btn-primary" />
+                            <input ng-if="address.indexOf('localhost') < 0" type="submit" value="Add" ng-click="add()" class="btn btn-primary" ng-class="{'disabled':!identity.data || !address}" />
                         </span>
                     </form>
                     <br/>
-                    <form onSubmit="javascript: void(0);" method="post" class="input-group">
+                    <form ng-if="address.indexOf('localhost') < 0" onSubmit="javascript: void(0);" method="post" class="input-group">
                         <input type="text" placeholder="Context URL(optional)" class="form-control" ng-model="context" />
                         <span class="input-group-btn">
-                            <input type="submit" value="Add Friend" ng-click="request()" class="btn btn-primary" ng-class="{'disabled':!identity.data || !context}" />
+                            <input type="submit" value="Add with Context" ng-click="request()" class="btn btn-primary" ng-class="{'disabled':!identity.data || !context}" />
                         </span>
                     </form>
                 </li>
