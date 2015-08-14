@@ -1,0 +1,14 @@
+<ul class="well" ng-controller="IdentityController">
+    <li>{{identity.name}}</li>
+    <li>{{identity.avatar}}</li>
+    <li><a href="{{identity.url}}" target="_blank">{{identity.url}}</a></li>
+    <li>{{identity.timestamp}}</li>
+    <li>{{identity.email}}</li>
+    <li>Initial Response: {{identity.initial_response}}</li>
+    <li>Last Response: {{identity.last_response}}</li>
+    <li>Resume Submitted: {{identity.resume_submitted}}</li>
+    <li>Recruiter Initial Appointment: {{identity.recruiter_phone_initial_appt}}</li>
+</ul>
+<div>
+    <span us-spinner spinner-key="spinner-1"></span>
+</div>
