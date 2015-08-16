@@ -1,22 +1,22 @@
 <div class="well">
-    <div ng-if="identity.data && address.indexOf('localhost') < 0">
+    <div ng-if="!editMode">
         {{identity.data.identity.name}}
         <br>
         <img src="{{identity.data.identity.avatar}}" />
         <br>
         <a href="{{identity.url}}" target="_blank">{{identity.data.identity.ip_address[0].address}}</a>
     </div>
-    <div ng-if="identity.data && address.indexOf('localhost') > -1">
-        <input type="text" ng-model="identity.data.identity.name" class="form-control" ng-class="{'disabled':!identity.data || !context}" placeholder="Name" />
-        <input type="text" ng-model="identity.data.identity.avatar" class="form-control" ng-class="{'disabled':!identity.data || !context}" placeholder="Avatar Url" />
-        <input type="text" ng-model="identity.data.identity.ip_address[0].address" class="form-control" ng-class="{'disabled':!identity.data || !context}" placeholder="IP Address" />
+    <div ng-if="editMode">
+        <input type="text" ng-model="identity.data.identity.name" class="form-control" ng-class="{'disabled':!editMode || !context}" placeholder="Name" />
+        <input type="text" ng-model="identity.data.identity.avatar" class="form-control" ng-class="{'disabled':!editMode || !context}" placeholder="Avatar Url" />
+        <input type="text" ng-model="identity.data.identity.ip_address[0].address" class="form-control" ng-class="{'disabled':!editMode || !context}" placeholder="IP Address" />
         <input type="submit" value="Save" ng-click="save()" class="btn btn-primary" ng-class="{'disabled':!identity.data}" />
     </div>
     <hr/>
     <h3 ng-if="identity.data">Friends</h3>
     <ul>
         <li ng-repeat="friend in identity.data.friends">
-            <span>{{friend.data.identity.name}}</span>
+            <span>{{friend.data.identity.name}}</span><img src="{{friend.data.identity.avatar}}" />
         </li>
     </ul>
     <h3 ng-if="identity.data">Status updates</h3>

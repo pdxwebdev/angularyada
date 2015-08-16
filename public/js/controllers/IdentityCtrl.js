@@ -1,4 +1,5 @@
 angular.module('IdentityCtrl', []).controller('IdentityController', ['$scope', '$http', 'usSpinnerService', 'Identity', function($scope, $http, usSpinnerService, Identity) {
+    
     $scope.startSpin = function(){
         usSpinnerService.spin('spinner-1');
     }
@@ -6,10 +7,16 @@ angular.module('IdentityCtrl', []).controller('IdentityController', ['$scope', '
         usSpinnerService.stop('spinner-1');
     }
     $scope.go = function(item) {
+      $scope.editMode = false;
+      $scope.identityObject = JSON.parse($scope.identitySerialized);
       usSpinnerService.spin('spinner-1');
-      $http.get($scope.address).then(function(resp) {
+      $http.post($scope.address, $scope.identityObject).then(function(resp) {
         usSpinnerService.stop('spinner-1');
-        console.log(resp.data);
+        if ($scope.identityObject.public_key === resp.data.public_key) {
+          $scope.editMode = true;
+        } else {
+          $scope.editMode = false;
+        }
         $scope.identity = resp.data;
         $scope.addressForm.$setPristine(true);
       }, function(err) {

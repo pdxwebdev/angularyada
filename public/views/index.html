@@ -35,11 +35,15 @@
 
             <ul class="nav navbar-nav pull-right">
                 <li>
+                    <form>
+                        <input type="text" placeholder="Identity Object (only paste when editing your profile, delete when finished!!!)" ng-model="identitySerialized" class="form-control" />
+                    </form>
+                    <br>
                     <form name="addressForm" onSubmit="javascript: void(0);" method="post" class="input-group">
                         <input type="text" placeholder="Identity URL" ng-model="address" class="form-control" />
                         <span class="input-group-btn">
                             <input type="submit" value="Go" ng-click="go()" class="btn btn-primary" />
-                            <input ng-if="address.indexOf('localhost') < 0" type="submit" value="Add" ng-click="add()" class="btn btn-primary" ng-class="{'disabled':!identity.data || !address}" />
+                            <input type="submit" value="Add" ng-click="add()" class="btn btn-primary" ng-class="{'disabled':!identity.data || !address}" />
                         </span>
                     </form>
                     <br/>
