@@ -56,6 +56,7 @@ function handleFiles(f)
             gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
 
             qrcode.decode(e.target.result);
+            document.getElementById('result').innerHTML = '<img src="' + e.target.result + '" />';
         };
         })(f[i]);
         reader.readAsDataURL(f[i]); 
@@ -106,7 +107,13 @@ function read(a)
     el.value = html;
     var e = new KeyboardEvent("change", {bubbles : true, cancelable : true, key : "Q", char : "Q", shiftKey : true});
     el.dispatchEvent(e);
-    document.getElementById("result").innerHTML='<strong>Success!</strong>';
+    var img = qr.image({
+        canvas: document.getElementById('qr-canvas'),
+        value: html,
+        size: 30
+    });
+    document.getElementById('result').innerHTML = '';
+    document.getElementById('result').appendChild(img);
 }   
 
 function isCanvasSupported(){
