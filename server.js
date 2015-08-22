@@ -5,6 +5,7 @@ var express        = require('express');
 var app            = express();
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
+var serverconfig = require('./serverconfig');
 
 // configuration ===========================================
 
@@ -39,7 +40,7 @@ require('./app/routes')(app); // configure our routes
 
 // start app ===============================================
 // startup our app at http://localhost:8080
-app.listen(port, '192.168.1.117');               
+app.listen(serverconfig.port, serverconfig.host);               
 
 // shoutout to the user                     
 console.log('Magic happens on port ' + port);
