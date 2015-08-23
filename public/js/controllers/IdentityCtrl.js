@@ -8,15 +8,23 @@ angular.module('IdentityCtrl', []).controller('IdentityController', ['$scope', '
     }
     $scope.go = function(item) {
       $scope.editMode = false;
+      usSpinnerService.spin('spinner-1');
+      $http.get($scope.address).then(function(resp) {
+        usSpinnerService.stop('spinner-1');
+        $scope.editMode = false;
+        $scope.identity = resp.data;
+        $scope.addressForm.$setPristine(true);
+      }, function(err) {
+        console.error('ERR', err);
+      });
+    }
+    $scope.goid = function(item) {
+      $scope.editMode = false;
       $scope.identityObject = JSON.parse($scope.identitySerialized);
       usSpinnerService.spin('spinner-1');
       $http.post($scope.address, $scope.identityObject).then(function(resp) {
         usSpinnerService.stop('spinner-1');
-        if ($scope.identityObject.public_key === resp.data.public_key) {
-          $scope.editMode = true;
-        } else {
-          $scope.editMode = false;
-        }
+        $scope.editMode = true;
         $scope.identity = resp.data;
         $scope.addressForm.$setPristine(true);
       }, function(err) {

@@ -57,8 +57,11 @@
 
             <ul class="nav navbar-nav pull-right">
                 <li>
-                    <form>
+                    <form onSubmit="javascript: void(0);" class="input-group">
                         <input type="text" id="identitySerializedd" placeholder="Identity Object (This field should only be populated when editing your profile!)" ng-model="identitySerialized" class="form-control" />
+                        <span class="input-group-btn">
+                            <input type="submit" value="Go" ng-click="go()" class="btn btn-primary" />
+                        </span>
                     </form>
                     <br>
                     <form name="addressForm" onSubmit="javascript: void(0);" method="post" class="input-group">
