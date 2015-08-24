@@ -1,5 +1,7 @@
-angular.module('IdentityCtrl', []).controller('IdentityController', ['$scope', '$http', 'usSpinnerService', 'Identity', function($scope, $http, usSpinnerService, Identity) {
-    
+angular.module('IdentityCtrl', []).controller('IdentityController', ['$scope', '$http', 'usSpinnerService', 'Identity', 'Config', function($scope, $http, usSpinnerService, Identity, Config) {
+    $scope.address = Config.friend;
+    $scope.idaddress = Config.identity;
+    $scope.context = Config.context;
     $scope.startSpin = function(){
         usSpinnerService.spin('spinner-1');
     }
@@ -22,7 +24,7 @@ angular.module('IdentityCtrl', []).controller('IdentityController', ['$scope', '
       $scope.editMode = false;
       $scope.identityObject = JSON.parse($scope.identitySerialized);
       usSpinnerService.spin('spinner-1');
-      $http.post($scope.address, $scope.identityObject).then(function(resp) {
+      $http.post($scope.idaddress, $scope.identityObject).then(function(resp) {
         usSpinnerService.stop('spinner-1');
         $scope.editMode = true;
         $scope.identity = resp.data;

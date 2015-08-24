@@ -15,8 +15,8 @@
     <hr/>
     <h3 ng-if="identity.data">Friends</h3>
     <ul>
-        <li ng-repeat="friend in identity.data.friends">
-            <span>{{friend.data.identity.name}}</span><img src="{{friend.data.identity.avatar}}" />
+        <li ng-repeat="friend in identity.data.friends" id="{{friend.public_key}}">
+            <img src="{{friend.data.identity.avatar}}" /><span>{{friend.data.identity.name}}</span>
         </li>
     </ul>
     <h3 ng-if="identity.data">Status updates</h3>
