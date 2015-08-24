@@ -1,4 +1,4 @@
-// public/js/app.js
+ // public/js/app.js
 angular.module('yada', [
 	'ui.router', 
 	'ngResource', 
@@ -7,7 +7,8 @@ angular.module('yada', [
 	'IdentityService']
 );
 
-angular.module('yada').config(function($stateProvider, $locationProvider) {
+angular.module('yada').config(function($stateProvider, $locationProvider, $httpProvider) {
+  $httpProvider.defaults.withCredentials = true;
   $stateProvider.state('index', { 
     url: '/',
     templateUrl: 'views/identity.html',

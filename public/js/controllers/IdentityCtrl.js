@@ -16,6 +16,19 @@ angular.module('IdentityCtrl', []).controller('IdentityController', ['$scope', '
         $scope.editMode = false;
         $scope.identity = resp.data;
         $scope.addressForm.$setPristine(true);
+        //TODO: Send this friend to your server
+        $http.post(
+          $scope.idaddress + 'postFriend/', 
+          {
+            public_key: resp.data.public_key, 
+            data: resp.data, 
+            METHOD: 'postFriend'
+          }
+        ).then(function(resp) {
+          console.log(resp)
+        }, function(err) {
+          console.error('ERR', err);
+        });
       }, function(err) {
         console.error('ERR', err);
       });
@@ -41,6 +54,7 @@ angular.module('IdentityCtrl', []).controller('IdentityController', ['$scope', '
       $http.post($scope.address + 'postIdentity/', {'METHOD':'postIdentity', 'data':$scope.identity}).then(function(resp) {
         usSpinnerService.stop('spinner-1');
         console.log(resp.data);
+        //TODO: update all contexts on save
       }, function(err) {
         console.error('ERR', err);
       });
