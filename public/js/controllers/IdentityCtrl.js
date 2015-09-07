@@ -15,21 +15,24 @@ angular.module('IdentityCtrl', []).controller('IdentityController', ['$scope', '
       $http.get($scope.address).then(function(resp) {
         usSpinnerService.stop('spinner-1');
         $scope.editMode = false;
-        $scope.identity = resp.data;
+        $scope.friendidentity = resp.data;
         $scope.addressForm.$setPristine(true);
         //TODO: Send this friend to your server
-        $http.post(
-          $scope.idaddress + 'postFriend/', 
-          {
-            public_key: resp.data.public_key, 
-            data: resp.data, 
-            METHOD: 'postFriend'
-          }
-        ).then(function(resp) {
-          console.log(resp)
-        }, function(err) {
-          console.error('ERR', err);
-        });
+        
+      }, function(err) {
+        console.error('ERR', err);
+      });
+    }
+    $scope.add = function(item) {
+      $http.post(
+        $scope.idaddress + 'postFriend/', 
+        {
+          public_key: $scope.identity.public_key, 
+          data: $scope.friendidentity, 
+          METHOD: 'postFriend'
+        }
+      ).then(function(resp) {
+        console.log(resp)
       }, function(err) {
         console.error('ERR', err);
       });
