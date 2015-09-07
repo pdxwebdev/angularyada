@@ -2,6 +2,7 @@ angular.module('IdentityCtrl', []).controller('IdentityController', ['$scope', '
     $scope.address = Config.friend;
     $scope.idaddress = Config.identity;
     $scope.context = Config.context;
+    $scope.newUser = {};
     $scope.startSpin = function(){
         usSpinnerService.spin('spinner-1');
     }
@@ -51,9 +52,23 @@ angular.module('IdentityCtrl', []).controller('IdentityController', ['$scope', '
       console.log($scope.identity);
       $scope.identity.data.identity.modified = time.getTime()
       usSpinnerService.spin('spinner-1');
-      $http.post($scope.address + 'postIdentity/', {'METHOD':'postIdentity', 'data':$scope.identity}).then(function(resp) {
+      $http.post($scope.idaddress + 'postIdentity/', {'METHOD':'postIdentity', 'data':$scope.identity}).then(function(resp) {
         usSpinnerService.stop('spinner-1');
         console.log(resp.data);
+        //TODO: update all contexts on save
+      }, function(err) {
+        console.error('ERR', err);
+      });
+    }
+    $scope.createUser = function(item) {
+      time = new Date();
+      console.log($scope.newUser);
+      $scope.newUser.modified = time.getTime()
+      usSpinnerService.spin('spinner-1');
+      $http.post($scope.newUser.ip_address[0].address + 'createIdentity/', {'METHOD':'postIdentity', 'data':$scope.newUser}).then(function(resp) {
+        usSpinnerService.stop('spinner-1');
+        console.log(resp.data);
+        $scope.createdUser = JSON.stringify(resp.data);
         //TODO: update all contexts on save
       }, function(err) {
         console.error('ERR', err);

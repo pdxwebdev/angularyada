@@ -7,10 +7,19 @@
         <a href="{{identity.url}}" target="_blank">{{identity.data.identity.ip_address[0].address}}</a>
     </div>
     <div ng-if="editMode">
+        <h3 ng-if="identity.data">Edit Profile</h3>
         <input type="text" ng-model="identity.data.identity.name" class="form-control" ng-class="{'disabled':!editMode || !context}" placeholder="Name" />
         <input type="text" ng-model="identity.data.identity.avatar" class="form-control" ng-class="{'disabled':!editMode || !context}" placeholder="Avatar Url" />
         <input type="text" ng-model="identity.data.identity.ip_address[0].address" class="form-control" ng-class="{'disabled':!editMode || !context}" placeholder="IP Address" />
         <input type="submit" value="Save" ng-click="save()" class="btn btn-primary" ng-class="{'disabled':!identity.data}" />
+    </div>
+    <div ng-if="identity.data.type == 'manager'">
+        <h3 ng-if="identity.data">Create User</h3>
+        <input type="text" ng-model="newUser.name" class="form-control" ng-class="{'disabled':!editMode || !context}" placeholder="Name" />
+        <input type="text" ng-model="newUser.avatar" class="form-control" ng-class="{'disabled':!editMode || !context}" placeholder="Avatar Url" />
+        <input type="text" ng-model="newUser.ip_address[0].address" class="form-control" ng-class="{'disabled':!editMode || !context}" placeholder="IP Address" />
+        <input type="submit" value="Create User" ng-click="createUser()" class="btn btn-primary" ng-class="{'disabled':!newUser.name || !newUser.avatar || !newUser.ip_address[0].address}" />
+        <input ng-if="createdUser" type="text" ng-model="createdUser" class="form-control" placeholder="Created User" />
     </div>
     <hr/>
     <h3 ng-if="identity.data">Friends</h3>

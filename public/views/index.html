@@ -81,13 +81,6 @@
                             </div>
                         </div>
                     </form>
-                    <br>
-                    <form ng-if="address.indexOf('localhost') < 0" onSubmit="javascript: void(0);" method="post" class="input-group">
-                        <input type="text" placeholder="Context URL(optional)" class="form-control" ng-model="context" />
-                        <span class="input-group-btn">
-                            <input type="submit" value="Add with Context" ng-click="request()" class="btn btn-primary" ng-class="{'disabled':!identity.data || !context}" />
-                        </span>
-                    </form>
                 </li>
             </ul>
 	    </nav>
